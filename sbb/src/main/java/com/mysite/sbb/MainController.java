@@ -17,6 +17,9 @@ public class MainController {
 		return "안녕하세요 sbb에 오신것을 환영합니다.";
 	}
 
+// @GetMapping - http://localhost:8080/ 콜
+// public - 
+// return - question/list 뷰 리다이렉트 - 이 유알엘을 메인페이지로 세팅
 	@GetMapping("/")
 	public String root() {
 		return "redirect:/question/list";
