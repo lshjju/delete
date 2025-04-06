@@ -19,20 +19,31 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+// @Getter - 게터 자동생성
+// @Setter - 세터 자동생성 - 엔티티는 세터 사용안함 - 여기선 레슨용으로 사용
+// @Entity - 엔티티 선언 
+// public - 페어런츠
+// @Id - pk 지정 - 중복되면 안되는 기본키
+// @GeneratedValue - 데이터 생성될때 넘버 알아서 1씩 증가
+// private -
+
+// @Column - 텍스트 200으로 제한
+// private - 
+
+// ? @Column - 텍스트 제한없음
+// private
+
+// private - 데이터 생성 시간
+
+// @OneToMany - 퀘스천은 하나고 앤서는 많음 - 페어런츠와 칠드런 연결 - 칠드런과 연결하기 위해 맵드바이에 페어런트가 누군지 전달 - 페어런트가 삭제 되면 이 칠드런의 다수의 데이터를 모두 한방에 삭제
+// private - 페어런트가 칠드런을 사용해야 하므로 칠드런을 엔티티 속성으로 추가 - 칠드런이 다수이므로 오브젝트를 리스트 자료형으로 세입
+
 @Getter
 @Setter
-// 스프링부트가 이 클래스가 엔티티구나 인식하게 하는 어노테이션
-// 디비 테이블과 자바를 매핑하는 롤
-// 코드대로 디비에 테이블이 만들어짐
-// 씨알유디는 못함
-// 씨알유디는 리포지토리 담당	
 @Entity
-// 사용자가 입력한 질문을 저장하는 롤
 public class Question {
-	// 중복되면 안되는 기본키
+	
 	@Id
-	// 데이터 하나 생길때마다 알아서 1씩 증가하게 함
-	// 뒤에 퍼렌서시스는 걍 묻따 코딩
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -44,10 +55,7 @@ public class Question {
 
 	private LocalDateTime createDate;
 
-	// 질문 하나 답은 많이
-	// 퀘스쳔이 앤서클래스의 퀘스쳔과 연결 롤
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-	// 앤서에서 여러개의 답을 가져와야 하니까 리스트
 	private List<Answer> answerList;
 
 	@ManyToOne
