@@ -50,18 +50,11 @@ public class QuestionService {
 		};
 	}
 
-    // getList - 파라미터로 받은 페이지 오브젝 리턴
-    // 리스트 자료타입으로 데이터 받아서 베리어블에 세입
-    // List<Sort.Order>
-    // 작성일시 역순 조회 메서드 세팅
-    // sorts.add
-    // 데치터 출력 위해 파라미터 넣기
-    // 앞에거 - 조회할 페이지 넘버
-    // 중간거 - 한 페이지에 보여 줄 게시물 개수
-    // 뒤에거 - 소팅방법
-    // Pageable pageable
-    // 메서드 콜해서 해당리파지토러에서 데이터 리턴 받아라
-    // return this.questionRepository   
+// public - 콘트롤러 콜 받음
+// List - 리스트 자료타입으로 데이터 받아서 베리어블에 세입
+// sorts - 작성일시 역순 조회 메서드 세팅
+// Pageable - 조회할 페이지 넘버 / 한 페이지에 보여 줄 게시물 개수 / 소팅방법
+// return - 리파지토리 콜해서 받은 데이터 콘트롤러로 보냄
 	public Page<Question> getList(int page, String kw) {
 		List<Sort.Order> sorts = new ArrayList<>();
 		sorts.add(Sort.Order.desc("createDate"));
