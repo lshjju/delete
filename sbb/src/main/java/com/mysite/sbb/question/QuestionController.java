@@ -40,17 +40,17 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class QuestionController {
 
-	// 디아이 
+// 디아이 
 	private final QuestionService questionService;
 	private final UserService userService;
 
-	// @GetMapping - /question/list?page=0
-	// public - 모델오브젝/페이지값,파라미터없으면디폴트는0/검색어
-	// log - 
-	// Page - 
-	// model - 데이터 뷰로 전달
-	// model - 데이터 뷰로 전달
-	// return - 퀘스천리스트 뷰 리턴
+// @GetMapping - /question/list?page=0
+// public - 모델오브젝/페이지값,파라미터없으면디폴트는0/검색어
+// log - 
+// Page - 서비스 콜해서 페이지 타입으로 세입
+// model - 데이터 뷰로 전달
+// model - 데이터 뷰로 전달
+// return - 퀘스천리스트 뷰 리턴
 	@GetMapping("/list")
 	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "kw", defaultValue = "") String kw) {
@@ -62,9 +62,9 @@ public class QuestionController {
 	}
 
 	@GetMapping(value = "/detail/{id}")
-	// 패스베리어블 - 유알엘에 파라미터 주사가 필요할때
-    	// 아이디 - 위에 밸류와 패스배리어블 파라미터 일치
-    	// AnswerForm answerForm - question_detail 이 거시기와 연결되었으므로 추가
+// 패스베리어블 - 유알엘에 파라미터 주사가 필요할때
+// 아이디 - 위에 밸류와 패스배리어블 파라미터 일치
+// AnswerForm answerForm - question_detail 이 거시기와 연결되었으므로 추가
 	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
 		// 겟퀘스천 메서드 호출해서 퀘스천을 템플릿에 전달
 		Question question = this.questionService.getQuestion(id);
@@ -80,23 +80,23 @@ public class QuestionController {
 	}
 
 	@PreAuthorize("isAuthenticated()")
-	// question_form에서 subject와 content를 포스트매핑으로 받음
+// question_form에서 subject와 content를 포스트매핑으로 받음
 	@PostMapping("/create")
-	// 이걸 파라미터로 넘겨줌
-    	// 이렇게 일단 정보를 받아 둠
-    	// 오버로딩
-    	// @Valid - subject content를 알아서 바인딩해서 QuestionForm으로 가져감
-    	// QuestionForm에서 검증하고 이리로 다시 넘어옴
-    	// BindingResult - 검증 결과 - 위치는 항상 @Valid 뒤
+// 이걸 파라미터로 넘겨줌
+// 이렇게 일단 정보를 받아 둠
+// 오버로딩
+// @Valid - subject content를 알아서 바인딩해서 QuestionForm으로 가져감
+// QuestionForm에서 검증하고 이리로 다시 넘어옴
+// BindingResult - 검증 결과 - 위치는 항상 @Valid 뒤
 	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
-		// 에러 있으면 아래 코드 리턴
+// 에러 있으면 아래 코드 리턴
 		if (bindingResult.hasErrors()) {
 			return "question_form";
 		}
 		SiteUser siteUser = this.userService.getUser(principal.getName());
-		// questionService create 메서드 콜해서 검증된 파라미터 넘김
+// questionService create 메서드 콜해서 검증된 파라미터 넘김
 		this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
-		// QuestionService가 저장하면 이리로 다시 넘어 와서 아래 코드 실행
+// QuestionService가 저장하면 이리로 다시 넘어 와서 아래 코드 실행
 		return "redirect:/question/list";
 	}
 
