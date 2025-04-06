@@ -25,29 +25,32 @@ import lombok.extern.slf4j.Slf4j;
 
 
 // 유알엘을 매핑하기 위한 콘트롤러
-// 질문 목록이 담긴 데이터를 죄회하여 이를 템플릿을 통해 화면에 전달
+// 질문 목록이 담긴 데이터를 조회하여 이를 템플릿을 통해 화면에 전달
 // 질문 목록 관련 데이터를 조회하려면 퀘스천리포지토리 사용
 // 퀘스천리포지토리로 조회한 질문 목록 데이터는 모델 클래스를 사용하여 템플릿에 전달
 
+
+// @Slf4j - 
+// @RequestMapping - 유알엘 접두사 또는 시작 부분으로 유알엘이 프리픽스로 알아서 딱딱 붙음 - /list = /question/list
+// @RequiredArgsConstructor - 디아이 롤 - 롬복 제공 - 파이널이 붙은 속석을 포함하는 콘스트럭터 자동 생성 역할
+// @Controller - 	
 @Slf4j
-// 프리픽스 - 유알엘 접두사 또는 시작 부분
-// 리퀘스트매핑 - 유알엘이 프리픽스로 알아서 딱딱 붙음
-// /list = /question/list	
 @RequestMapping("/question")
-// 디아이 롤 - 롬복 제공 - 파이널이 붙은 속석을 포함하는 콘스트럭터 자동 생성 역할	
 @RequiredArgsConstructor
 @Controller
 public class QuestionController {
 
-	// 디아이 - 퀘스천서비스 객체 주입 
+	// 디아이 
 	private final QuestionService questionService;
 	private final UserService userService;
 
-	// @GetMapping - http://localhost:8080/question/list?page=0
-	// public - 모델 오브젝은 파라미터로 지정하면 스프링부트가 모델 오브젝 자동 생성
-	// public - 페이지값을 가져오기 위해 파라미터 입력
-	// public - 파라미터가 전달되지 않는 경우 디폴트는 0으로 세팅
-	// public - 스프링부트 페이징 첫 페이지는 0
+	// @GetMapping - /question/list?page=0
+	// public - 모델오브젝/페이지값,파라미터없으면디폴트는0/검색어
+	// log - 
+	// Page - 
+	// model - 데이터 뷰로 전달
+	// model - 데이터 뷰로 전달
+	// return - 퀘스천리스트 뷰 리턴
 	@GetMapping("/list")
 	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "kw", defaultValue = "") String kw) {
