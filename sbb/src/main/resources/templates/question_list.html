@@ -24,24 +24,12 @@
 		</thead>
 		<tbody>
 <!-- 
-th - 타임리프라는 뜻 
-모델 오브젝의 퀘스천리스틀 달러퀘스천리스트 로 읽어옴
-이것을 퀘스쳔 변수에 담음
-퀘스천리스트 개수만큼 반복하여 출력하라
-자바 포이치문과 비슷
-<tr th:each="question, loop : ${paging}"> - 콘트롤러 해당 배리어블네임 변경되므로 이것도 변경 
-퀘스천리스트의 첫번째 서브젝 출력
-타임리프에서 유알엘은 반드시 앳마크 브레이스 사이에
-스트링과 자바오브젝 콜라보는 버티컬바로 감싸안음
-퀘스천리스트의 첫번째 크리에잇데이트 출력
+<tr th:each="question, loop : ${paging}"> - 반복문 - 콘트롤러 해당 배리어블네임 변경되므로 이것도 변경 
 게시물 번호 = 전체 게시물 개수 - (현재 페이지 * 페이지당 게시물 개수) - 나열 인덱스
-<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>			
+@{|/question/detail/${question.id}|} - 퀘스천디테일아이디 뷰 - 타임리프에서 유알엘은 반드시 앳마크 브레이스 사이에 - 스트링과 자바오브젝 콜라보는 버티컬바로 감싸안음
 th:if="${#lists.size(question.answerList) > 0 - 앤서 있으면
 th:text="${#lists.size(question.answerList)} - 데이터 출력
-${questionList} - 담당 콘트롤러가 보낸 리턴값이 담긴 배리어블
-question : - 뒤에 있는 배리어블 데이터 개수 만큼 반복하여 출력 	
-${question.subject} - 해당 디비 서브젝
-${question.createDate} - 해당 디비 시간
 -->
 			<tr class="text-center" th:each="question, loop : ${paging}">
 				<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
