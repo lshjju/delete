@@ -1,7 +1,10 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
-	<!-- 질문 -->
-	<!-- 퀘스천콘트롤러 디테일 메서드의 모델 오브젝에 퀘스천 베리어블로 저장된 서브젝과 콘텐트 데이터를 땡겨옴  -->
+<!-- 질문 -->
+<!-- 
+${question.subject} - 콘트롤러 리턴 받아 데이터 바인딩
+${question.content} - 콘트롤러 리턴 받아 데이터 바인딩
+-->
 	<h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
 	<div class="card my-3">
 		<div class="card-body">
