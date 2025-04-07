@@ -62,6 +62,12 @@ public class QuestionService {
 		return this.questionRepository.findAllByKeyword(kw, pageable);
 	}
 
+// public - 콘트롤러 콜 받음 - 아이디포함
+// Optional - 리파지토리 콜해서 자료형으로 데이터 세입
+// if - 옵셔널이니까 엘스스테이트먼트 필요할 듯 - 해당 데이터가 있다면   
+// return - 데이터 콘트롤러로 보냄      
+// else - 없다면
+// throw - 익셉션 처리	
 	public Question getQuestion(Integer id) {
 		Optional<Question> question = this.questionRepository.findById(id);
 		if (question.isPresent()) {
