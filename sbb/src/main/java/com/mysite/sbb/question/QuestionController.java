@@ -62,7 +62,7 @@ public class QuestionController {
 	}
 	
 // @GetMapping - 퀘스천리스트아이디뷰 콜 받음 
-// public - 모델/퀘스천아이디,변하는 아이디값은 패스배리어블 필요,ㅇ우위우ㅇ/앤서폼,question_detail이 거시기와 연결되었으므로 추가	- 
+// public - 모델/퀘스천아이디,변하는 아이디값은 패스배리어블 필요,있ㄴ느는느ㄴ우ㅇ/앤서폼,question_detail이 거시기와 연결되었으므로 추가	- 
 // Question - 아이디 - 위에 밸류와 패스배리어블 파라미터 일치
 // model - 
 // return - 퀘스천디테일뷰 리턴	
