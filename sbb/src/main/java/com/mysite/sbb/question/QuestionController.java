@@ -60,13 +60,14 @@ public class QuestionController {
 		model.addAttribute("kw", kw);
 		return "question_list";
 	}
-
+	
+// @GetMapping - 퀘스천리스트아이디뷰 콜 받음 
+// public - 모델/퀘스천아이디,변하는 아이디값은 패스배리어블 필요ㅇㅇ요우위우ㅇ우위우ㅇ/앤서폼,question_detail이 거시기와 연결되었으므로 추가	- 
+// Question - 아이디 - 위에 밸류와 패스배리어블 파라미터 일치
+// model - 
+// return - 퀘스천디테일뷰 리턴	
 	@GetMapping(value = "/detail/{id}")
-// 패스베리어블 - 유알엘에 파라미터 주사가 필요할때
-// 아이디 - 위에 밸류와 패스배리어블 파라미터 일치
-// AnswerForm answerForm - question_detail 이 거시기와 연결되었으므로 추가
-	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
-		// 겟퀘스천 메서드 호출해서 퀘스천을 템플릿에 전달
+	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {	
 		Question question = this.questionService.getQuestion(id);
 		model.addAttribute("question", question);
 		return "question_detail";
