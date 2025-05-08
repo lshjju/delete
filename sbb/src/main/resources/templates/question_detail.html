@@ -80,6 +80,10 @@ ${question.content} - 콘트롤러 리턴 받아 데이터 바인딩
 	<!-- 답변 작성 -->
 	<!-- 타임리프 액션 폼 코딩 -->
 	<!-- th:object="${answerForm}" - 거시기와 연걸 -->
+<!--
+/answer/create/id 콘트롤러로 포스트 유알엘 콜
+<form th:action="@{|/answer/create/${question.id}|}" method="post">
+-->	
 	<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 		<!-- name="content" id="content" - 를 th:field="*{content}" 로 체인지 -->
