@@ -30,12 +30,12 @@ public class AnswerController {
 	private final AnswerService answerService;
 	private final UserService userService;
 
-	
+	// @PostMapping - 포스트로 콜 왔으니까 포스트매핑
+	// public - 리퀘스트파람으로 템플릿에서 콘텐트 밸류 가져옴 - QuestionController questionCreate 와 같음
+	// Question 아이디를 담당서비스메서드에 보내서 밸류 세입
+	// return 유알엘 리다이렉트
 	@PreAuthorize("isAuthenticated()")
-	// question 엔티티의 아이디
 	@PostMapping("/create/{id}")
-	// question_detail textarea의 content 를 얻어옴
-	// QuestionController questionCreate 와 같음
 	public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm,
 			BindingResult bindingResult, Principal principal) {
 		Question question = this.questionService.getQuestion(id);
