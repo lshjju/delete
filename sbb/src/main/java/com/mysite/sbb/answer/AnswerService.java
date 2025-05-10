@@ -14,10 +14,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class AnswerService {
-
+	
+// private - DI
 	private final AnswerRepository answerRepository;
-
-	// AnswerController에서 create 을 콜해주면 디비에 리플라이 저장
+	
+// public - 앤서콘트롤러 크리에이트앤서에서 콜받음 
+// Answer - 오브젝 생성
+// answer - 파라미터 내용 데이터 담기
+// answer - 작성시간 라이브러리 데이터 담기
+// answer - 파라미터 퀘스천 데이터 담기
+// this - 데이터 담아서 리파지토리 메서드 콜
 	public Answer create(Question question, String content, SiteUser author) {
 		Answer answer = new Answer();
 		answer.setContent(content);
