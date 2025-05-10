@@ -39,7 +39,10 @@ ${question.content} - 콘트롤러 리턴 받아 데이터 바인딩
 		</div>
 	</div>
 	<!-- 답변의 갯수 표시 -->
-	<!-- 사이즈 - 타임리프 기능 - 해당 오브젝의 길이를 리턴 -->
+<!--
+#lists.size(question.answerList) - 타임리프 기능 - 해당 오브젝의 길이를 리턴 - 앤서개수를 리턴
+th:each="answer : ${question.answerList}" - 앤서 개수만큼 데이터 바인딩
+-->		
 	<h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
 	<!-- 답변 반복 시작 -->
 	<!-- 리플라이 내용 출력 -->
