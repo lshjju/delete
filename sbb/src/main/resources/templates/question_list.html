@@ -25,11 +25,11 @@
 		<tbody>
 <!-- 
 <tr th:each="question, loop : ${paging}"> - 반복문 - 콘트롤러 해당 배리어블네임 변경되므로 이것도 변경 
-게시물 번호 = 전체 게시물 개수 - (현재 페이지 * 페이지당 게시물 개수) - 나열 인덱스
-<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>			
-@{|/question/detail/${question.id}|} - 퀘스천디테일아이디 뷰 - 타임리프에서 유알엘은 반드시 앳마크 브레이스 사이에 - 스트링과 자바오브젝 콜라보는 버티컬바로 감싸안음
-th:if="${#lists.size(question.answerList) > 0 - 앤서 있으면
-th:text="${#lists.size(question.answerList)} - 데이터 출력
+<tr th:each="question, loop : ${questionList}"> - 데이터 있는 만큼 반복			
+<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td> - 게시물 번호 = 전체 게시물 개수 - (현재 페이지 * 페이지당 게시물 개수) - 나열 인덱스
+<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a> - 퀘스천디테일아이디 뷰 - 타임리프에서 유알엘은 반드시 앳마크 브레이스 사이에 - 스트링과 자바오브젝 콜라보는 버티컬바로 감싸안음
+<span class="text-danger small ms-2" th:if="${#lists.size(question.answerList) > 0}" th:text="${#lists.size(question.answerList)}"> - 앤서 있으면 데이터를 출력하라
+<td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td> - 날짜를 한국환경에 맞게 출력하는 메서드		
 -->
 			<tr class="text-center" th:each="question, loop : ${paging}">
 				<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
