@@ -1,6 +1,8 @@
-<!-- layout.html 상속하라 -->
+<!-- 
+<html layout:decorate="~{layout}"> - layout.html 상속 받아라 
+<div layout:fragment="content" class="container my-3"> - layout.html 내부의 content를 상속 받아라 
+-->
 <html layout:decorate="~{layout}">
-<!-- layout:fragment="content"와 같게 -->	
 <div layout:fragment="content" class="container my-3">
 	<div class="row my-3">
 		<div class="col-6">
