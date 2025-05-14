@@ -85,24 +85,23 @@ public class QuestionController {
 		return "question_form";
 	}
 
+
+// @PreAuthorize - 
+// @PostMapping - 퀘스천 폼에서 포스트로 왔으니까 포스트 유알엘 매핑
+// public - 위에 동일한 네임 메서드가 있지만 포스트 매핑이니까 오버로딩으로 메서드 만들기 - 폼 밸류 파라미터로 받음 - @Valid - subject content를 알아서 바인딩해서 QuestionForm으로 가져감 - QuestionForm에서 검증하고 이리로 다시 넘어옴 - BindingResult - 검증 결과 - 위치는 항상 @Valid 뒤
+// if - 에러 있으면 아래 
+// return - 해당 뷰 리턴
+// SiteUser 
+// this -  questionService create 메서드 콜해서 검증된 파라미터 넘김
+// return - QuestionService가 저장하면 이리로 다시 넘어 와서 아래 코드 실행
 	@PreAuthorize("isAuthenticated()")
-// question_form에서 subject와 content를 포스트매핑으로 받음
 	@PostMapping("/create")
-// 이걸 파라미터로 넘겨줌
-// 이렇게 일단 정보를 받아 둠
-// 오버로딩
-// @Valid - subject content를 알아서 바인딩해서 QuestionForm으로 가져감
-// QuestionForm에서 검증하고 이리로 다시 넘어옴
-// BindingResult - 검증 결과 - 위치는 항상 @Valid 뒤
 	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
-// 에러 있으면 아래 코드 리턴
 		if (bindingResult.hasErrors()) {
 			return "question_form";
 		}
 		SiteUser siteUser = this.userService.getUser(principal.getName());
-// questionService create 메서드 콜해서 검증된 파라미터 넘김
 		this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
-// QuestionService가 저장하면 이리로 다시 넘어 와서 아래 코드 실행
 		return "redirect:/question/list";
 	}
 
