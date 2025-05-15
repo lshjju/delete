@@ -77,15 +77,20 @@ public class QuestionService {
 		}
 	}
 
-	// QuestionController에서 데이터 받음
+
+// public 퀘스천콘트롤러 퀘스천크리에잇 콜 받음
+// Question 리파지토리로 보내기 위해 퀘스천 오브젝 만들기
+// q - 제목 세입
+// q - 내용 세입
+// q - 작성시간 세입
+// q - 	
+// this - 세입한거 담아서 리파지터리에 세입 - questionRepository가 처리한 데이터를 세입하게 함
 	public void create(String subject, String content, SiteUser user) {
-		// 데이터 처리
 		Question q = new Question();
 		q.setSubject(subject);
 		q.setContent(content);
 		q.setCreateDate(LocalDateTime.now());
 		q.setAuthor(user);
-		// questionRepository가 처리한 데이터를 세입하게 함
 		this.questionRepository.save(q);
 	}
 
