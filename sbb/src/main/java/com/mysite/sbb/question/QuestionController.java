@@ -92,7 +92,7 @@ public class QuestionController {
 // if - 에러 있으면 아래 
 // return - 해당 뷰 리턴
 // SiteUser 
-// this -  questionService create 메서드 콜해서 검증된 파라미터 넘김
+// this - 제목/내용 데이터 담아서 퀘스천서비스 메서드 콜 - questionService create 메서드 콜해서 검증된 파라미터 넘김
 // return - QuestionService가 저장하면 이리로 다시 넘어 와서 아래 코드 실행
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create")
