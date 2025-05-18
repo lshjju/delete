@@ -88,12 +88,12 @@ public class QuestionController {
 
 // @PreAuthorize - 
 // @PostMapping - 퀘스천 폼에서 포스트로 왔으니까 포스트 유알엘 매핑
-// public - 위에 동일한 네임 메서드가 있지만 포스트 매핑이니까 오버로딩으로 메서드 만들기 - 폼 밸류 파라미터로 받음 - @Valid - subject content를 알아서 바인딩해서 QuestionForm으로 가져감 - QuestionForm에서 검증하고 이리로 다시 넘어옴 - BindingResult - 검증 결과 - 위치는 항상 @Valid 뒤
-// if - 에러 있으면 아래 
+// public - 폼 밸류 파라미터로 받음 - @Valid - subject content를 알아서 바인딩해서 QuestionForm으로 가져감 - QuestionForm에서 검증하고 이리로 다시 넘어옴 - BindingResult - 검증 결과 - 위치는 항상 @Valid 뒤 - 오버로딩
+// if - 퀘스천폼 검증 결과 에러 있으면 아래 코드 실행 
 // return - 해당 뷰 리턴
-// SiteUser 
-// this - 제목/내용 데이터 담아서 퀘스천서비스 메서드 콜 - questionService create 메서드 콜해서 검증된 파라미터 넘김
-// return - QuestionService가 저장하면 이리로 다시 넘어 와서 아래 코드 실행
+// SiteUser - 
+// this - 검증된 제목/내용 데이터 담아서 퀘스천서비스 메서드 콜
+// return - 리턴
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create")
 	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
