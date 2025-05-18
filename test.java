@@ -21,8 +21,18 @@ public class QuestionService {
     }
 }
 
+public class QuestionController {
 
-@PostMapping("/create")
-  public String questionCreate(@RequestParam(value="subject") String subject, @RequsetParam(value="content") String content){
+    @PostMapping("/create")
+    public String questionCreate(@Valid QuestionForm, BindingResult bindingResult){
+    if(bindingResult.hasErrors()){
+        return "question_form";
+    }
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
     return "redirect://question/list";
-  }
+      }
+    
+}
+
+
+
