@@ -74,13 +74,12 @@ public class QuestionController {
 	}
 
 
-// @PreAuthorize
+// @PreAuthorize - 
 // @GetMapping - 퀘스천리스트 뷰 질문등록 콜 받음
-// public - question_form 에 th:object가 추가 되서 QuestionForm 필요
+// public - question_form 에 th:object가 추가 되서 파라미터에 QuestionForm 필요 - 이 경우 뷰를 위한 모델 오브젝은 생략 가능
 // return - 퀘스천폼 뷰 출력
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/create")
-	// question_form 에 th:object가 추가 되서 QuestionForm 필요
 	public String questionCreate(QuestionForm questionForm) {
 		return "question_form";
 	}
