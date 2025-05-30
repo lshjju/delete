@@ -30,27 +30,27 @@ public class AnswerController {
 	private final AnswerService answerService;
 	private final UserService userService;
 
-// @PostMapping - 포스트로 콜 왔으니까 포스트매핑
+
+// @PreAuthorize
+// @PostMapping - question_detail 답변등록 버튼 - 포스트매핑
 // public - 리퀘스트파람으로 템플릿에서 콘텐트 밸류 가져옴 - QuestionController questionCreate 와 같음
-// Question 아이디를 담당서비스메서드에 보내서 밸류 세입
-// this - 파라미터 담아서 서비스메서드 콜	
-// return 유알엘 리다이렉트
+// Question - 아이디를 담당서비스메서드에 보내서 밸류 세입
+// SiteUser - 
+// if - QuestionController questionCreate 와 같음
+// model - 아래에서 거시기 리턴하려면 거시기가 필요함 - 그러므로 거시기 오브젝을 가져옴
+// return - 에러가 있으면 거시기로
+// Answer - AnswerService create을 콜해서 리플라이를 저장할 수 있게 함
+// return - 거시기를 파라미터 담아서 메서드 콜
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create/{id}")
 	public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm,
 			BindingResult bindingResult, Principal principal) {
 		Question question = this.questionService.getQuestion(id);
 		SiteUser siteUser = this.userService.getUser(principal.getName());
-		// QuestionController questionCreate 와 같음
 		if (bindingResult.hasErrors()) {
-			// 아래에서 거시기 리턴하려면 거시기가 필요함
-			// 그러므로 거시기 오브젝을 가져옴
 			model.addAttribute("question", question);
-			// 에러가 있으면 거시기로
 			return "question_detail";
 		}
-		// AnswerService create을 콜해서 리플라이를 저장할 수 있게 함
-		// 거시기를 파라미터 담아서 메서드 콜
 		Answer answer = this.answerService.create(question, answerForm.getContent(), siteUser);
 		return String.format("redirect:/question/detail/%s#answer_%s", answer.getQuestion().getId(), answer.getId());
 	}
