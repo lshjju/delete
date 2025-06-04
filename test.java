@@ -22,6 +22,29 @@ public class QuestionService {
 }
 
 public class QuestionController {
+    
+	@GetMapping("/list")
+	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "kw", defaultValue = "") String kw) {
+		log.info("page:{}, kw:{}", page, kw);
+		Page<Question> paging = this.questionService.getList(page, kw);
+		model.addAttribute("paging", paging);
+		model.addAttribute("kw", kw);
+		return "question_list";
+	}
+    
+
+    @GetMapping(value = "/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
+// Question question = this.questionService.getQuestion(id);
+// model.addAttribute("question", question);
+// return "question_detail";
+    }
+
+    @GetMapping("/create")
+    public String questionCreate(QuestionForm questionForm) {
+        return "question_form";
+    }
 
     @PostMapping("/create")
     public String questionCreate(@Valid QuestionForm, BindingResult bindingResult){
