@@ -88,16 +88,18 @@ th:each="answer : ${question.answerList}" - 앤서 개수만큼 데이터 바인
 	<!-- 타임리프 액션 폼 코딩 -->
 	<!-- th:object="${answerForm}" - 거시기와 연걸 -->
 <!--
-/answer/create/id 콘트롤러로 포스트 유알엘 콜
-<form th:action="@{|/answer/create/${question.id}|}" method="post">
+<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3"> - 답변 등록 form의 입력 항목과 AnswerForm을 타임리프에 연결하기 위해 th:object 속성을 추가 - /answer/create/id 콘트롤러로 포스트 유알엘 콜
+<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </div> - 검증이 실패할 경우 #fields.hasAnyErrors()와 #fields.allErrors()를 사용하여 오류 메시지를 표시
+	<textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control" rows="10"></textarea> - 답변 등록 기능의 content 항목도 th:field 속성을 사용하도록 변경 - name="content" id="content" - 를 th:field="*{content}" 로 체인지
+<input type="submit" value="답변등록" class="btn btn-primary my-2"> - 저장 버튼 누르면 유알엘 포스트 방식으로 호출	
 -->	
 	<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
-		<!-- name="content" id="content" - 를 th:field="*{content}" 로 체인지 -->
 		<textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control"
 			rows="10"></textarea>
 		<textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
-		<!-- 저장 버튼 누르면 유알엘 포스트 방식으로 호출 -->
 		<input type="submit" value="답변등록" class="btn btn-primary my-2">
 	</form>
 </div>
