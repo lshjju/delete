@@ -62,7 +62,7 @@ public class QuestionController {
 	}
 	
 // ? @GetMapping - 퀘스천리스트아이디뷰 콜 받음 - 배리어블네임은 아래 파라미터 배리어블네임과 같아야 함 - value 붙고 안붙고 차이?
-// public - 모델/퀘스천아이디,변하는 아이디값은 패스배리어블 필요/앤서폼,question_detail이 거시기와 연결되었으므로 추가
+// public - 모델/퀘스천아이디,변하는 아이디값은 패스배리어블 필요 - 앤서폼을 question_detail이 사용하도록 수정했으니까 여기도 앤서폼 추가
 // Question - 서비스 메서드 콜해서 배리어블에 해당 데이터 세입
 // model - 배리어블에 네임 부여해서 뷰에서 출력 가능하게 함
 // return - 퀘스천디테일뷰 리턴	
