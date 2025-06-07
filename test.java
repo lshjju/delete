@@ -1,3 +1,6 @@
+
+
+
 @Getter
 @Setter
 public class QuestionForm {
@@ -10,6 +13,12 @@ public class QuestionForm {
 }
 
 
+
+
+
+
+
+
 public class QuestionService {
 
     public void create(String subject, String content) {
@@ -20,6 +29,11 @@ public class QuestionService {
       this.questionRepository.sav(q);
     }
 }
+
+
+
+
+
 
 public class QuestionController {
     
@@ -56,6 +70,22 @@ public class QuestionController {
       }
     
 }
+
+
+
+@Controller
+public class HelloController {
+    @GetMapping("/hello")
+    @ResponseBody
+    public String hello(){
+	    return "hello World";
+    }
+}
+
+
+
+
+
 
 
 
