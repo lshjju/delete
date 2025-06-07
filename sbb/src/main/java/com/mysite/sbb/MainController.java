@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MainController {
 
-// @GetMapping - 유알엘 콜
-// @ResponseBody - 리턴이 뷰
-// public - 
-// return - 리스판스바디니까 리턴 뷰에서 출력	
+// @GetMapping - 
+// @ResponseBody - 
+// public - 겟매핑 유알엘과 메서드네임은 달라도 됨
+// return - 리턴 값 뷰에 출력	
 	@GetMapping("/sbb")
 	@ResponseBody
 	public String index() {
