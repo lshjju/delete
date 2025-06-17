@@ -1,26 +1,24 @@
 package com.mysite.sbb.answer;
 
 import com.mysite.sbb.question.Question;
-import com.mysite.sbb.question.QuestionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Service;
 
-@RequestMapping("/answer")
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
-@Controller
-public class AnswerController {
+@Service
+public class AnswerService {
 
-    private final QuestionService questionService;
+    private final AnswerRepository answerRepository;
 
-    @PostMapping("/create/{id}")
-    public String createAnswer(Model model, @PathVariable("id") Interger id, @RequestParam(value="content") String content) {
-        Question question = this.questionService.getQuestion(id);
-        // toto: 답변스
-        return String.format("redirect:/question/detail/%s", id);
+
+    public void create(Question question, String content) {
+        Answer answer = new Answer();
+        answer.setContent(content);
+        answer.setCreateDate(LocalDateTime.now());
+        answer.setQuestion(question);
+        this.answerRepository.save(answer);
+        
     }
 }
