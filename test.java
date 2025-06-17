@@ -1,21 +1,26 @@
-(... 생략 ...)
-import org.springframework.web.bind.annotation.RequestMapping;
-(... 생략 ...)
+package com.mysite.sbb.answer;
 
-@RequestMapping("/question")
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@RequestMapping("/answer")
 @RequiredArgsConstructor
 @Controller
-public class QuestionController {
+public class AnswerController {
 
     private final QuestionService questionService;
 
-    @GetMapping("/list")
-    public String list(Model model) {
-        (... 생략 ...)
-    }
-
-    @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
-        (... 생략 ...)
+    @PostMapping("/create/{id}")
+    public String createAnswer(Model model, @PathVariable("id") Interger id, @RequestParam(value="content") String content) {
+        Question question = this.questionService.getQuestion(id);
+        // toto: 답변스
+        return String.format("redirect:/question/detail/%s", id);
     }
 }
