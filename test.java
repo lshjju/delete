@@ -1,12 +1,12 @@
 (... 생략 ...)
-
 public class QuestionController {
 
     (... 생략 ...)
 
-    @GetMapping("/create")
-    public String questionCreate() {
-        return "question_form"
-        
-    }
+    @PostMapping("/create")
+    public String questionCreate(@RequestParam(value="subject") String subject, 
+                                 @RequestParam(value="content") String content){
+        this.questionService.create(subject, content);
+    return "redirect:/question/list";
+}
 }
