@@ -1,19 +1,16 @@
-package com.mysite.sbb.question;
+(... 생략 ...)
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+(... 생략 ...)
+public class QuestionController {
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+    (... 생략 ...)
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class QuestionForm {
-    @NotEmpty(message="제목은 필수항목입니다.")
-    @Size(max=200)
-    private String subject;
-
-    @NotEmpty(message="내용은 필수항목입니다.")
-    private String content;
-    
+    @PostMapping("/create")
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+        if (bindindingResult.hasErrors()){
+            return "question_form";
+    }
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+            return "redirect:/question/list";
 }
