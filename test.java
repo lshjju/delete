@@ -10,7 +10,7 @@ public class AnswerController {
     public String createAnswer(Model model, @PathVariable("id") Integer id, 
            @Valid AnswerForm answerForm, BindingResult bindingResult) {
         Question question = this.questionService.getQuestion(id);
-        if(bindingResult.hasErrors()){
+        if(bindigResult.hasErrors()){
             model.addAttribute("question", question);
             return "question_detail";
         }
