@@ -1,21 +1,14 @@
 (... 생략 ...)
-import jakarta.validation.Valid;
-import org.springframework.validation.BindingResult;
+import com.mysite.sbb.answer.AnswerForm;
 (... 생략 ...)
-public class AnswerController {
+public class QuestionController {
 
     (... 생략 ...)
 
-    @PostMapping("/create/{id}")
-    public String createAnswer(Model model, @PathVariable("id") Integer id, 
-           @Valid AnswerForm answerForm, BindingResult bindingResult) {
-        Question question = this.questionService.getQuestion(id);
-        if(bindigResult.hasErrors()){
-            model.addAttribute("question", question);
-            return "question_detail";
-        }
-
-        this.answerService.create(question, answerForm.getContent());
-        return String.format("redirect:/question/detail/%s", id);
+    @GetMapping(value = "/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
+        (... 생략 ...)
     }
+
+    (... 생략 ...)
 }
