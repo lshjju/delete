@@ -1,14 +1,31 @@
-(... 생략 ...)
-import com.mysite.sbb.answer.AnswerForm;
-(... 생략 ...)
-public class QuestionController {
+package com.mysite.sbb;
 
-    (... 생략 ...)
+import java.time.LocalDateTime;
 
-    @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
-        (... 생략 ...)
-    }
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-    (... 생략 ...)
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+public class Question {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(length = 200)
+    private String subject;
+
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
+    private LocalDateTime createDate;
+
+    
 }
