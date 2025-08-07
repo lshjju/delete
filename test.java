@@ -1,7 +1,14 @@
-package com.mysite.sbb;
+package com.mysite.sbb.question;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-public interface AnswerRepository extends JpaRepository<Answer, Integer> {
+@Controller
+public class QuestionController {
 
+    @GetMapping("/question/list")
+    @ResponseBody
+    public String list() {
+        return "question_list";
+    }
 }
