@@ -1,19 +1,12 @@
-package com.mysite.sbb.question;
+(... 생략 ...)
+public class QuestionController {
 
-import java.util.List;
+    private final QuestionService questionService;
 
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
-@Service
-public class QuestionService {
-
-    private final QuestionRepository questionRepository;
-
-    public List<Question> getList() {
-        return this.questionRepository.findAll();
-        
+    @GetMapping("/question/list")
+    public String list(Model model) {
+        List<Question> questionList = this.questionService.getList();
+        model.addAttribute("questionList", questionList);
+        return "question_list";
     }
 }
