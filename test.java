@@ -1,24 +1,21 @@
-package com.mysite.sbb.question;
-
-import java.util.List;
+package com.mysite.sbb;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 @Controller
-public class QuestionController {
+public class MainController {
 
-    private final QuestionRepository questionRepository;
+    @GetMapping("/sbb")
+    @ResponseBody
+    public String index() {
+        return "안녕하세요 sbb에 오신것을 환영합니다.";
+    }
 
-    @GetMapping("/question/list")
-    public String list(Model model) {
-        List<Question> questionList = this.questionRepository.findAll();
-        model.addAttribute("questionList", questionList);
-        return "question_list";
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/question/list";
         
     }
 }
