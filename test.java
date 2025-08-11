@@ -1,12 +1,21 @@
 (... 생략 ...)
+import org.springframework.web.bind.annotation.RequestMapping;
+(... 생략 ...)
+
+@RequestMapping("/question")
+@RequiredArgsConstructor
+@Controller
 public class QuestionController {
 
-    (... 생략 ...)
+    private final QuestionService questionService;
 
-    @GetMapping(value = "/question/detail/{id}")
+    @GetMapping("/list")
+    public String list(Model model) {
+        (... 생략 ...)
+    }
+
+    @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
-        Question question = this.questionSevice.getQuestion(id);
-        model.addAtribute("question", question);
-        return "question_detail";
+        (... 생략 ...)
     }
 }
