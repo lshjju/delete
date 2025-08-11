@@ -1,12 +1,12 @@
-package com.mysite.sbb;
+(... 생략 ...)
+public class QuestionController {
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+    (... 생략 ...)
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "entity not found")
-public class DataNotFoundException extends RuntimeException {
-    private static fianl long serialVersionUID = 1L;
-    public DataNotFoundException(String message){
-        super(message);
+    @GetMapping(value = "/question/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id) {
+        Question question = this.questionSevice.getQuestion(id);
+        model.addAtribute("question", question);
+        return "question_detail";
     }
 }
