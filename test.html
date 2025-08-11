@@ -1,16 +1,13 @@
-<table>
-    <thead>
-        <tr>
-            <th>제목</th>
-            <th>작성일시</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="question, index : ${questionList}">
-            <td>
-                <a th:href="@{|/question/detail/${question.id}|}" th:"${question.subject}"></a>
-            </td>
-            <td th:text="${question.createDate}"></td>
-        </tr>
-    </tbody>
-</table>
+(... 생략 ...)
+import org.springframework.web.bind.annotation.PathVariable;
+(... 생략 ...)
+public class QuestionController {
+
+    (... 생략 ...)
+
+    @GetMapping(value = "/question/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id {
+        return "question_detail";
+       
+    }
+}
