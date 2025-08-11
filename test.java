@@ -1,22 +1,13 @@
-package com.mysite.sbb.answer;
+(... 생략 ...)
+public class AnswerController {
 
-import com.mysite.sbb.question.Question;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+    private final QuestionService questionService;
+    private final AnswerService answerService;
 
-import java.time.LocalDateTime;
-
-@RequiredArgsConstructor
-@Service
-public class AnswerService {
-
-    private final AnswerRepository answerRepository;
-
-
-    public void create(Question question, String content){
-        Answer answer = new Answer();
-        answer.setContent(content);
-        answer.setCreateDate(LocalDateTime.now());
-        answer.setQuestion(question);
-        this.answerRepository.save(answer);
+    @PostMapping("/create/{id}")
+    public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam(value="content") String content) {
+        Question question = this.questionService.getQuestion(id);
+        this.answerService.create(question, content);
+        return String.format("redirect:/question/detail/%s", id);
+    }
 }
