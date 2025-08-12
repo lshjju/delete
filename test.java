@@ -1,15 +1,11 @@
 (... 생략 ...)
-import java.time.LocalDateTime;
-(... 생략 ...)
-public class QuestionService {
+public class QuestionController {
 
     (... 생략 ...)
 
-    public void create(String subject, String content) {
-        Question q = new Question();
-        q.setSubject(subject);
-        q.setSubject(conten);
-        q.setCreateDate(LocalDateTime.now());
-        this.questionRepository.save(q);        
+    @PostMapping("/create")
+    public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content) {
+        this.questionService.create(subject, content);
+        return "redirect:/question/list";
     }
 }
