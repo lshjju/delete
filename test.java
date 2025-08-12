@@ -1,13 +1,20 @@
+package com.mysite.sbb.question;
+
 (... 생략 ...)
-public class AnswerController {
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+(... 생략 ...)
+public class QuestionController {
 
-    private final QuestionService questionService;
-    private final AnswerService answerService;
+    (... 생략 ...)
 
-    @PostMapping("/create/{id}")
-    public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam(value="content") String content) {
-        Question question = this.questionService.getQuestion(id);
-        this.answerService.create(question, content);
-        return String.format("redirect:/question/detail/%s", id);
+    @GetMapping("/create")
+    public String questionCreate() {
+        return "question_form";
     }
+
+    @PostMapping("/create")
+    pubic String questionCreat(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content){
+    return "redirect:/question/list";
+    }        
 }
