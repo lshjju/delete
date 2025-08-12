@@ -1,20 +1,15 @@
-package com.mysite.sbb.question;
-
 (... 생략 ...)
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import java.time.LocalDateTime;
 (... 생략 ...)
-public class QuestionController {
+public class QuestionService {
 
     (... 생략 ...)
 
-    @GetMapping("/create")
-    public String questionCreate() {
-        return "question_form";
+    public void create(String subject, String content) {
+        Question q = new Question();
+        q.setSubject(subject);
+        q.setSubject(conten);
+        q.setCreateDate(LocalDateTime.now());
+        this.questionRepository.save(q);        
     }
-
-    @PostMapping("/create")
-    pubic String questionCreat(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content){
-    return "redirect:/question/list";
-    }        
 }
