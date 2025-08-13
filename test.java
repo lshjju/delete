@@ -1,13 +1,20 @@
-package com.mysite.sbb.answer;
+(... 생략 ...)
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+(... 생략 ...)
+public class AnswerController {
 
-import jakarta.validation.constraints.NotEmpty;
+    (... 생략 ...)
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class AnswerForm {
-    @NotEmpty(message = "내용은 필수항목입니다.")
-    private String content;
+    @PostMapping("/create/{id}")
+    public String createAnswer(Model model, @PathVariable("id") Integer id, 
+            @Valid AnswerForm answerForm, BindingResult bindingResult) {
+        Question question = this.questionService.getQuestion(id);
+        if(bindingResult.hasErrors()){
+        model.addAttribute("question", question);
+            return "question_detail";
+        }
+        this.answerService.create(question, answerForm.getContent());
+        return String.format("redirect:/question/detail/%s", id);
+    }
 }
