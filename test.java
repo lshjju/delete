@@ -1,34 +1,22 @@
-package com.mysite.sbb;
+package com.mysite.sbb.question;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
-@Getter
-@Setter
-@Entity
-public class Question {
-    @Id
-    @GeneratedValue(stragegy = GenerationType.IDENTITY)
-    private Integer id;
-    
-
-    @Column(length = 200)
-    private String subject;
-    
-
-    @Column(columnDefintion = "TEXT")
-    private String content;
-
-    prvate LocalDateTime createDate;
-    
+@RequiredArgsConstructor
+@Controller
+public class QuestionController {
 
     
+    private final QuestionRepository questionRepository;
+    @GetMapping("/question/list")
+    public String list(Model, model) {
+        
+        return "question_list";
+    }
 }
