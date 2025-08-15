@@ -1,20 +1,34 @@
-(... 생략 ...)
-import jakarta.validation.Valid;
-import org.springframework.validation.BindingResult;
-(... 생략 ...)
-public class AnswerController {
+package com.mysite.sbb;
 
-    (... 생략 ...)
+import java.time.LocalDateTime;
 
-    @PostMapping("/create/{id}")
-    public String createAnswer(Model model, @PathVariable("id") Integer id, 
-            @Valid AnswerForm answerForm, BindingResult bindingResult) {
-        Question question = this.questionService.getQuestion(id);
-        if(bindingResult.hasErrors()){
-        model.addAttribute("question", question);
-            return "question_detail";
-        }
-        this.answerService.create(question, answerForm.getContent());
-        return String.format("redirect:/question/detail/%s", id);
-    }
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+public class Question {
+    @Id
+    @GeneratedValue(stragegy = GenerationType.IDENTITY)
+    private Integer id;
+    
+
+    @Column(length = 200)
+    private String subject;
+    
+
+    @Column(columnDefintion = "TEXT")
+    private String content;
+
+    prvate LocalDateTime createDate;
+    
+
+    
 }
