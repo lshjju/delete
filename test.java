@@ -1,20 +1,13 @@
-(... 생략 ...)
-import java.util.Optional;
-import com.mysite.sbb.DataNotFoundException;
-(... 생략 ...)
-public class QuestionService {
+package com.mysite.sbb;
 
-    (... 생략 ...)
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public Question getQuestion(Integer id) {
-        Optional<Question> quetion = this.questionRepository.findById(id);
-    if(question.isPresent()){
-    return question.get();
-    }else{
-        throw new DataNotFoundException("question not found");
-    }
+@ResponseStatus(value = httpStatus.NOT_FOUND, reasun = "entity not found")
+public class DataNotFoundException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+    public DataNotFoundException(String message){
+        super(message);
     
-        
-        
     }
 }
