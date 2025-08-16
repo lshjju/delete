@@ -1,18 +1,13 @@
-package com.mysite.sbb.question;
+(... 생략 ...)
+import org.springframework.web.bind.annotation.PathVariable;
+(... 생략 ...)
+public class QuestionController {
 
-import java.util.List;
+    (... 생략 ...)
 
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
-@Service
-public class QuestionService {
-
-    private final QuestionRepository questionRepository;
-
-    public List<Question> getList() {
-        return this.questionRepository.findAll();
+    @GetMapping(value = "/question/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id) {
+    
+        return "question_detail";
     }
 }
