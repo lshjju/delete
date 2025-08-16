@@ -1,13 +1,20 @@
 (... 생략 ...)
-import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Optional;
+import com.mysite.sbb.DataNotFoundException;
 (... 생략 ...)
-public class QuestionController {
+public class QuestionService {
 
     (... 생략 ...)
 
-    @GetMapping(value = "/question/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public Question getQuestion(Integer id) {
+        Optional<Question> quetion = this.questionRepository.findById(id);
+    if(question.isPresent()){
+    return question.get();
+    }else{
+        throw new DataNotFoundException("question not found");
+    }
     
-        return "question_detail";
+        
+        
     }
 }
