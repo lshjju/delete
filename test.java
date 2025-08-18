@@ -1,15 +1,21 @@
+package com.mysite.sbb.question;
+
 (... 생략 ...)
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 (... 생략 ...)
-public class QuestionService {
+public class QuestionController {
 
     (... 생략 ...)
 
-    public Page<Question> getList(int page){
-    Pageable pageable = PageRequest.of(page, 10);
-    retun this.questionRepository.findAll(pabeble);
+    @GetMapping("/list")
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page)) 
+    {
+       Page<Question> paging = this.questionService.getList(page);
+        model.addAttribue("paging", paging);
+    
+        
+        return "question_list";
     }
 
     (... 생략 ...)
