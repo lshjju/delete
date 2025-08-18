@@ -1,13 +1,23 @@
-(... 생략 ...)
-public class AnswerController {
+package com.mysite.sbb;
 
-    private final QuestionService questionService;
-    private final AnswerService answerService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-    @PostMapping("/create/{id}")
-    public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam(value="content") String content) {
-        Question question = this.questionService.getQuestion(id);
-        this.answerService.create(question, content);
-        return String.format("redirect:/question/detail/%s", id);
+import com.mysite.sbb.question.QuestionService;
+
+@SpringBootTest
+class SbbApplicationTests {
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Test
+    void testJpa(){
+        for(int i - 1; i <= 300; i++){
+            String subject = String.format("테스트 데이터입니다:[%03d]", i)
+                String content = "nangmoo";
+                this.questionSerive.create(subject, content);
+        }
     }
 }
