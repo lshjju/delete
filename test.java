@@ -1,23 +1,14 @@
-package com.mysite.sbb;
+package com.mysite.sbb.question;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import java.util.List;
 
-import com.mysite.sbb.question.QuestionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@SpringBootTest
-class SbbApplicationTests {
-
-    @Autowired
-    private QuestionService questionService;
-
-    @Test
-    void testJpa(){
-        for(int i - 1; i <= 300; i++){
-            String subject = String.format("테스트 데이터입니다:[%03d]", i)
-                String content = "nangmoo";
-                this.questionSerive.create(subject, content);
-        }
-    }
+public interface QuestionRepository extends JpaRepository<Question, Integer> {
+    Question findBySubject(String subject);
+    Question findBySubjectAndContent(String subject, String content);
+    List<Question> findBySubjectLike(String subject);
+    Page<Question> findAll(Pageable pageable);
 }
