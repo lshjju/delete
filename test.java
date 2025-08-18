@@ -1,14 +1,16 @@
-package com.mysite.sbb.question;
-
-import java.util.List;
-
+(... 생략 ...)
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+(... 생략 ...)
+public class QuestionService {
 
-public interface QuestionRepository extends JpaRepository<Question, Integer> {
-    Question findBySubject(String subject);
-    Question findBySubjectAndContent(String subject, String content);
-    List<Question> findBySubjectLike(String subject);
-    Page<Question> findAll(Pageable pageable);
+    (... 생략 ...)
+
+    public Page<Question> getList(int page){
+    Pageable pageable = PageRequest.of(page, 10);
+    retun this.questionRepository.findAll(pabeble);
+    }
+
+    (... 생략 ...)
 }
