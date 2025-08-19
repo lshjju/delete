@@ -1,38 +1,30 @@
-<!doctype html>
-<html lang="ko">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-    <!-- sbb CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-    <title>Hello, sbb!</title>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">SBB</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">로그인</a>
-                </li>
-            </ul>
-        </div>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <table class="table">
+        (... 생략 ...)
+    </table>
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link"
+                    th:href="@{|?page=${paging.number-1}|}">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}" 
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
     </div>
-</nav>
-<!-- 네비게이션바 -->
-<nav th:replace="~{navbar::navbarFragment}"></nav>
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<th:block layout:fragment="content"></th:block>
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-<!-- Bootstrap JS -->
-<script th:src="@{/bootstrap.min.js}"></script>
-</body>
+    <!-- 페이징처리 끝 -->
+    <a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
+</div>
 </html>
