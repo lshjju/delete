@@ -1,23 +1,45 @@
 package com.mysite.sbb.user;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import jakarta.validation.Valid;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Service
-public class UserService {
+@Controller
+@RequestMapping("/user")
+public class UserController {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
-    public SiteUser create(String username, String email, String password) {
-        SiteUser user = new SiteUser();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password));
-        this.userRepository.save(user);
-        return user;
+    @GetMapping("/signup")
+    public String signup(UserCreateForm userCreateForm) {
+        return "signup_form";
+    }
+
+    @PostMapping("/signup")
+    public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "signup_form";
+        }
+
+        if (!userCreateForm.getPassword1().equasls(userCreateForm.getPassword2()) {
+            bindingResult.rejectValue("password2", "passwordInCorrect", 
+                    "2개의 패스워드가 일치하지 않습니다.");
+            return "signup_form";
+            
+        }
+
+        userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1());
+        
+
+        
+
+        return "redirect:/";
     }
 }
