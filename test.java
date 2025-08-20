@@ -1,22 +1,29 @@
-package com.mysite.sbb.question;
+package com.mysite.sbb.user;
 
-(... 생략 ...)
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.data.domain.Page;
-(... 생략 ...)
-public class QuestionController {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-    (... 생략 ...)
+import lombok.Getter;
+import lombok.Setter;
 
-    @GetMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page)) 
-    {
-       Page<Question> paging = this.questionService.getList(page);
-        model.addAttribue("paging", paging);
+@Getter
+@Setter
+@Entity
+public class SiteUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
+    private String username;
+
+    private String password;
     
-        
-        return "question_list";
-    }
-
-    (... 생략 ...)
+    @Column(unique = true)
+    private String email;
+    
 }
