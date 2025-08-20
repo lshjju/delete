@@ -1,29 +1,24 @@
 package com.mysite.sbb.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
-@Getter
-@Setter
-@Entity
-public class SiteUser {
+@RequiredArgsConstructor
+@Service
+public class UserService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private final UserRepository userRepository;
 
-    @Column(unique = true)
-    private String username;
-
-    private String password;
-    
-    @Column(unique = true)
-    private String email;
-    
+    public SiteUser create(String username, String email, String password) {
+        SiteUser user = new SiteUser();
+        user.setUsername(username);
+        user.setEmail(email);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
+        this.userRepository.save(user);
+        
+        return user;
+    }
 }
