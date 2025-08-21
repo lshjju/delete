@@ -1,16 +1,27 @@
 package com.mysite.sbb.user;
 
-import lombok.Getter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-@Getter
-public enum UserRole {
-    ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER");
+import lombok.RequiredArgsConstructor;
 
-    UserRole(String value){
-        this.value = value;
+@RequiredArgsConstructor
+@Service
+public class UserSecurityService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws  {
+        
     }
-
-    private String value;
 }
