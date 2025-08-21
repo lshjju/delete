@@ -1,10 +1,9 @@
-(... 생략 ...)
-public class UserController {
+package com.mysite.sbb.user;
 
-    (... 생략 ...)
+import java.util.Optional;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login_form";
-    }
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<SiteUser, Long> {
+    Optional<SiteUser> findByusername(String username);
 }
