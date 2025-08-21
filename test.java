@@ -1,29 +1,10 @@
 (... 생략 ...)
+public class UserController {
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
-            .csrf((csrf) -> csrf
-                .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
-            .headers((headers) -> headers
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                    XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-            .formLogin((formLogin) -> formLogin
-                       .loginPage("/user/login")
-                       .defaultSuccessUrl("/")
-                
-            )
-        ;
-        return http.build();
-    }
+    (... 생략 ...)
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
     }
 }
