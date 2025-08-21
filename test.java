@@ -1,9 +1,16 @@
 package com.mysite.sbb.user;
 
-import java.util.Optional;
+import lombok.Getter;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<SiteUser, Long> {
-    Optional<SiteUser> findByusername(String username);
+@Getter
+public enum UserRole {
+    ADMIN("ROLE_ADMIN"),
+    USER("ROLE_USER");
+
+    UserRole(String value){
+        this.value = value;
+    }
+
+    private String value;
 }
