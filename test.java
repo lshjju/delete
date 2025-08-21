@@ -1,27 +1,18 @@
-package com.mysite.sbb.user;
+(... 생략 ...)
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+(... 생략 ...)
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+    (... 생략 ...)
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
-@Service
-public class UserSecurityService implements UserDetailsService {
-
-    private final UserRepository userRepository;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws  {
-        
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    
+    
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }
