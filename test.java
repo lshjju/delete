@@ -1,10 +1,19 @@
 (... 생략 ...)
-import jakarta.persistence.ManyToOne;
-import com.mysite.sbb.user.SiteUser;
+import java.util.Optional;
+import com.mysite.sbb.DataNotFoundException;
 (... 생략 ...)
-public class Question {
+@Service
+public class UserService {
+
     (... 생략 ...)
 
-    @ManyToOne
-    private SiteUser author;
+    public SiteUser getUser(String username) {
+       Optionnal<SiteUser> siteUser = this.userRepository.findBysuername(username);
+        if(siteUser.isPresent()){
+            return siteUser.get();
+        }else{
+            throw new DataNotFoundException("siteuser not found");
+        }
+        
+    }
 }
