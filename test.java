@@ -1,31 +1,35 @@
-package com.mysite.sbb;
+package com.mysite.sbb; 
 
-import java.time.LocalDateTime;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.LocalDateTime; 
+import java.util.List; 
 
-@Getter
-@Setter
-@Entity
-public class Answer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+import jakarta.persistence.CascadeType; 
+import jakarta.persistence.Column; 
+import jakarta.persistence.Entity; 
+import jakarta.persistence.GeneratedValue; 
+import jakarta.persistence.GenerationType; 
+import jakarta.persistence.Id; 
+import jakarta.persistence.OneToMany; 
 
-    @Column(columnDefinition = "TEXT")
-    private String content;
+import lombok.Getter; 
+import lombok.Setter; 
 
-    private LocalDateTime createDate;
+@Getter 
+@Setter 
+@Entity 
+public class Question { 
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Integer id; 
 
-    private Question question;
-    
+    @Column(length = 200) 
+    private String subject; 
 
-    
+    @Column(columnDefinition = "TEXT") 
+    private String content; 
 
-    
+    private LocalDateTime createDate; 
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answerList;
 }
