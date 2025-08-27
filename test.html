@@ -6,10 +6,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr th:each="quesiton : ${questionList}">
-            <td th:text="${question.subject}"></td>
+        <tr th:each="question, index : ${questionList}">
+            <td>
+                <a ></a>
+            </td>
             <td th:text="${question.createDate}"></td>
         </tr>
     </tbody>
 </table>
-
