@@ -1,12 +1,12 @@
 (... 생략 ...)
+import org.springframework.web.bind.annotation.PathVariable;
+(... 생략 ...)
 public class QuestionController {
 
-    private final QuestionService questionService;
+    (... 생략 ...)
 
-    @GetMapping("/question/list")
-    public String list(Model model) {
-        List<Question> questionList = this.questionService.getList();
-        model.addAttribute("questionList", questionList);
-        return "question_list";
-    }
+    @GetMapping(value = "/question/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id){
+    return "question_detail";
+}
 }
