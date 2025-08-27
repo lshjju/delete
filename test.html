@@ -8,7 +8,7 @@
     <tbody>
         <tr th:each="question, index : ${questionList}">
             <td>
-                <a ></a>
+                <a th:href="@{|/qusetion/detail/${question.id}|}" th:text="${question.subject}"></a>
             </td>
             <td th:text="${question.createDate}"></td>
         </tr>
