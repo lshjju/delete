@@ -1,17 +1,12 @@
 (... 생략 ...)
-import java.util.Optional;
-import com.mysite.sbb.DataNotFoundException;
-(... 생략 ...)
-public class QuestionService {
+public class QuestionController {
 
     (... 생략 ...)
 
-    public Question getQuestion(Integer id){
-        Optional<Question> question = this.questionRepository.findById(id);
-        if(question.isPresent()){
-            return question.get();
-        }else{
-            throw new DataNotFoundException("question not found");
-        }
-}
+    @GetMapping(value = "/question/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id) {
+        Question question = this.questionService.getQuestion(id);
+        model.addAttribute("question", question);
+        return "question_detail";
+    }
 }
