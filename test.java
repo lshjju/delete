@@ -1,22 +1,17 @@
-package com.mysite.sbb.question;
-
 (... 생략 ...)
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 (... 생략 ...)
 public class QuestionController {
 
     (... 생략 ...)
 
-    @GetMapping("/create")
-    public String questionCreate() {
-        return "question_form";
-    }
-
     @PostMapping("/create")
-        public String questionCreate(@RequestParam(value="subject") String subject, 
-                                     @RequestParam(value="content") String content){
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list";
-
     }
 }
