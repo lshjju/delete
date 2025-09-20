@@ -1,14 +1,22 @@
-(... 생략 ...)
-import com.mysite.sbb.answer.AnswerForm;
-(... 생략 ...)
-public class QuestionController {
+package com.mysite.sbb;
 
-    (... 생략 ...)
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-    @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
-        (... 생략 ...)
+import com.mysite.sbb.question.QuestionService;
+
+@SpringBootTest
+class SbbApplicationTests {
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Test
+    void testJpa() {
+        for (int i = 1, i <= 300; i++){
+            String subject = String.format("it is a test:[%3d]", i);
+            String content = "null";
+            this.questionService.create(subject, content);
     }
-
-    (... 생략 ...)
 }
