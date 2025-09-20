@@ -1,22 +1,20 @@
-package com.mysite.sbb;
+package com.mysite.sbb.question;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+(... 생략 ...)
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
+(... 생략 ...)
+public class QuestionController {
 
-import com.mysite.sbb.question.QuestionService;
+    (... 생략 ...)
 
-@SpringBootTest
-class SbbApplicationTests {
-
-    @Autowired
-    private QuestionService questionService;
-
-    @Test
-    void testJpa() {
-        for (int i = 1, i <= 300; i++){
-            String subject = String.format("it is a test:[%3d]", i);
-            String content = "null";
-            this.questionService.create(subject, content);
+    @GetMapping("/list")
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+    Page<Question> paging = this.questionService.getList(page);
+    model.addAttribute("paging", paging);
+        
+        return "question_list";
     }
+
+    (... 생략 ...)
 }
