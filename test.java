@@ -1,19 +1,17 @@
-package com.mysite.sbb.question;
-
 (... 생략 ...)
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.data.domain.Page;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.data.domain.Sort;
 (... 생략 ...)
-public class QuestionController {
+public class QuestionService {
 
-    (... 생략 ...)
+   (... 생략 ...)
 
-    @GetMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-    Page<Question> paging = this.questionService.getList(page);
-    model.addAttribute("paging", paging);
-        
-        return "question_list";
+    public Page<Question> getList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"))
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return this.questionRepository.findAll(pageable);
     }
 
     (... 생략 ...)
