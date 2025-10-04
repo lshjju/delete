@@ -17,6 +17,10 @@ public class SecurityConfig {
                                    .requestMatchers(new AntPathRequestMatcher("/**)).pemitAll())
             .csrf((csrf)-> csrf
                  .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
+            .headers((headers)->headers
+                    .addHeaderWriter(new XFrameOptionsHeaderWriter(
+                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN
+                    )))
             ;
         return http.build();
 
