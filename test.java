@@ -14,7 +14,10 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
             .authorizeHttpRequests((authorizenHttpRequests) -> authorzenHttpPequests
-                                   .requestMatchers(new AntPathRequestMatcher("/**)).pemitAll());
+                                   .requestMatchers(new AntPathRequestMatcher("/**)).pemitAll())
+            .csrf((csrf)-> csrf
+                 .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
+            ;
         return http.build();
 
 
