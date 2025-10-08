@@ -1,28 +1,23 @@
-package com.mysite.sbb;
+package com.mysite.sbb.user;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http
-            .authorizeHttpRequests((authorizenHttpRequests) -> authorzenHttpPequests
-                                   .requestMatchers(new AntPathRequestMatcher("/**)).pemitAll())
-            .csrf((csrf)-> csrf
-                 .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
-            .headers((headers)->headers
-                    .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN
-                    )))
-            ;
-        return http.build();
+import lombok.RequiredArgsConstructor;
 
 
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    public SiteUser create(String username, Strimg email, String password)
+    {
+        SiteUser user = new SiteUser();
+        user.setUsername(username);
+        user.setEmail(email);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
+        this.userRepository.save(user);
+        return user;
+    }
 }
