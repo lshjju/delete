@@ -1,23 +1,46 @@
 package com.mysite.sbb.user;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+import jakarta.validation.Valid;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/user")
+public class UserController {
 
-public class UserService {
+    private final UserService userService;
+    
 
-    private final UserRepository userRepository;
+    @GetMapping("/signup")
+    public String signup(UserCreateForm userCreateForm) {
+        return "signup_form";
+        
+    }
 
-    public SiteUser create(String username, Strimg email, String password)
-    {
-        SiteUser user = new SiteUser();
-        user.setUsername(username);
-        user.setEmail(email);
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(password));
-        this.userRepository.save(user);
-        return user;
+    @PostMapping("/signup")
+    public String signup(@Valid UserCreateForm userCreateForm, BindingResult bidingResult) {
+        if (bindingResult.hasErrors()) {
+            return "signup_form";
+        }
+
+        if (!userCreateForm.getPassword1().equals(userCreateForm.getPassword2())) {
+            bindingResult.rejectValue("password2", "passwordIncorrect", "its not");
+            return "signup_form";
+            
+        }
+
+        userService.create(userCreateForm.getUsername(),
+                           userCreateForm.getEmail(), userCreateForm.getPassword1());
+
+        
+
+        return "redirect:/";
     }
 }
