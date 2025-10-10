@@ -1,25 +1,16 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment="content" class="container my-3">
-    <table class="table">
-        <thead class="table-dark">
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성일시</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="question, loop : ${paging}">
-                <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-                <td>
-                    <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
-                    <span class="text-danger small ms-2"
-                        th:if="${#lists.size(question.answerList) > 0}"
-                        th:text="${#lists.size(question.answerList)}">
-                    </span>
-                </td>
-                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></d>
-            </tr>
-        </tbody>
-    </table>
-(... 생략 ...)
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">SBB</a>
+        (... 생략 ...)
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">로그인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/signup}">회원가입</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
