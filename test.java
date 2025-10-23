@@ -1,10 +1,10 @@
 (... 생략 ...)
-import jakarta.persistence.ManyToOne;
-import com.mysite.sbb.user.SiteUser;
-(... 생략 ...)
-public class Question {
+public class UserController {
+
     (... 생략 ...)
 
-    @ManyToOne
-    private SiteUser author;
+    @GetMapping("/login")
+    public String login(){
+    return "login_form";
+}
 }
