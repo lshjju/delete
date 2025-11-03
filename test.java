@@ -1,18 +1,9 @@
-package com.mysite.sbb.user;
+(... 생략 ...)
+import com.mysite.sbb.user.SiteUser;
+(... 생략 ...)
+public class Answer {
+    (... 생략 ...)
 
-import lombok.Getter;
-
-
-@Getter
-public enum UserRole {
-    ADMIN("ROLE_ADMIN");
-    USER("ROLE_USER");
-
-    UserRole(String value){
-        this.value = value;
-    }
-
-    private String value;
+    @ManyToOne
+    private SiteUser author;
 }
-
-
