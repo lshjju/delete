@@ -1,16 +1,23 @@
 (... 생략 ...)
+import java.security.Principal;
 import com.mysite.sbb.user.SiteUser;
+import com.mysite.sbb.user.UserService;
 (... 생략 ...)
-public class QuestionService {
+public class QuestionController {
+
+    private final QuestionService questionService;
+    private final UserService userService;
 
     (... 생략 ...)
 
-    public void create(String subject, String content, SiteUser user) {
-        Question q = new Question();
-        q.setSubject(subject);
-        q.setContent(content);
-        q.setCreateDate(LocalDateTime.now());
-        q.setAuthor(user);
-        this.questionRepository.save(q);
+    @PostMapping("/create")
+    public String questionCreate(@Valid QuestionForm questionForm, 
+            BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
+        return "redirect:/question/list";
     }
 }
