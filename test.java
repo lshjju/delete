@@ -1,10 +1,21 @@
 (... 생략 ...)
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 (... 생략 ...)
+public class QuestionController {
 
-@Configuration
-@EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
     (... 생략 ...)
+@PreAuthorize("isAuthenticated()")
+@GetMapping("/modify/{id}")    
+    public String questionModify(QuestionForm questionForm, @PathVariable("id") 
+                                 Integer id, Principal principal){
+Question question = this.questionService.getQuestion(id);
+    if(!question.getAuthor().getUsername().equals(principal.getName())){
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+    }
+    questionForm.setSubject(guestion.getSubject());
+    questionForm.setContent(guestion.getContent());
+    return "question_form";
+}
+
 }
