@@ -1,21 +1,13 @@
 (... 생략 ...)
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-(... 생략 ...)
-public class QuestionController {
+public class QuestionService {
 
     (... 생략 ...)
-@PreAuthorize("isAuthenticated()")
-@GetMapping("/modify/{id}")    
-    public String questionModify(QuestionForm questionForm, @PathVariable("id") 
-                                 Integer id, Principal principal){
-Question question = this.questionService.getQuestion(id);
-    if(!question.getAuthor().getUsername().equals(principal.getName())){
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-    }
-    questionForm.setSubject(guestion.getSubject());
-    questionForm.setContent(guestion.getContent());
-    return "question_form";
-}
 
+    public void modify(Question queston, String subject, String content) {
+    question.setSubject(subject);
+    question.setSubject(content);
+    question.setModifyDate(LocalDateTime.now());
+    this.qustionRepository.save(question);
+        
+    }
 }
