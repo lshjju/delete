@@ -3,11 +3,13 @@ public class QuestionService {
 
     (... 생략 ...)
 
-    public void modify(Question queston, String subject, String content) {
+    public void modify(Question question, String subject, String content) {
+
     question.setSubject(subject);
-    question.setSubject(content);
+    question.setContent(content);
     question.setModifyDate(LocalDateTime.now());
-    this.qustionRepository.save(question);
+    this.questionRepository.save(question);
+    
         
     }
 }
