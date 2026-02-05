@@ -1,22 +1,10 @@
-(... 생략 ...)
-<!-- 질문 -->
-<h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
-<div class="card my-3">
-    <div class="card-body">
-        (... 생략 ...)
-        <div class="my-3">
-            <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-outline-secondary"
-                sec:authorize="isAuthenticated()"
-                th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
-                th:text="수정"></a>
-                        <a href="javascript:void(0);"
-                th:data-url="@{|/question/delete/${question.id}|}" 
-                class="delete btn btn-sm btn-outline-secondary"
-                sec:authorize="isAuthenticated()"
-                th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
-                th:text="삭제"></a>
-
-        </div>
-    </div>
-</div>
-(... 생략 ...)
+<script type='text/javascript'>
+docoment.getElementByClassName("delete");
+    Array.from(delete_elements).forEach(funtion(element){
+        element.addEventListener('click', function(){
+            if(confirm("정말로 삭제하시겠습니까?")){
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+</script>
