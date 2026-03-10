@@ -1,20 +1,29 @@
 (... 생략 ...)
-public class QuestionController {
+import java.util.Optional;
+import com.mysite.sbb.DataNotFoundException;
+(... 생략 ...)
+public class AnswerService {
 
     (... 생략 ...)
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/delete/{id}")
-    public String questionDelete(
-    Principal principal,
-    @PathVariable("id") Integer id
-    ) {
-    Question question = this.questionService.getQuestion(id);
-    if(!question.getAuthor().getUsename().equals(principal.getName())){
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
-    }
-    this.questionService.delete(question);
-    return "redirect:/";
+public Answer getAnswer(Integer id){
+    Optional<Answer> answer = this.answerRepository.findById(id);
+    if(answer.isPresent()){
+        return answer.get();
         
     }
+    else{
+        throw new DataNotFoundException("answer not found");
+    }
+}
+
+public void midify(Answer answer, String content){
+    answer.setContent(content);
+    answer.setModifyDate(LocalDateTime.now());
+    this.answerRepository.save(answer);
+}
+
+
+
+    
 }
