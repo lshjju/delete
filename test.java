@@ -1,29 +1,19 @@
 (... 생략 ...)
-import java.util.Optional;
-import com.mysite.sbb.DataNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.server.ResponseStatusException;
 (... 생략 ...)
-public class AnswerService {
+public class AnswerController {
 
     (... 생략 ...)
 
-public Answer getAnswer(Integer id){
-    Optional<Answer> answer = this.answerRepository.findById(id);
-    if(answer.isPresent()){
-        return answer.get();
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{id}")
+    public String answerModify(AnswerForm answerForm, @PathVariable("id") Inger id, Principal principal) {
+    Answer answer = this.answerService.getAnswer(id);
+    if(){
         
     }
-    else{
-        throw new DataNotFoundException("answer not found");
+        
     }
-}
-
-public void midify(Answer answer, String content){
-    answer.setContent(content);
-    answer.setModifyDate(LocalDateTime.now());
-    this.answerRepository.save(answer);
-}
-
-
-
-    
 }
